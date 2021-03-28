@@ -37,7 +37,7 @@
  * ########################################################################
  */
 
-int MinDistance = 30;
+int MinDistance = 20;
 
 bool Left;
 bool Right;
@@ -88,22 +88,22 @@ bool Sensor_Read(int Trig, int Echo){ //########################################
 }
 
 void Drive(bool L, bool R){ //######################################################################### Drive
-  if(L == true && R == true){
+  if(L == true && R == true){ //###################################### Stop
     digitalWrite(8, LOW);
     digitalWrite(10, LOW);
   }
 
-  else if(L == true){ //########################################################## Left
+  else if(L == true){ //############################################## Left
     digitalWrite(10, HIGH);
     digitalWrite(8, LOW);
   }
 
-  else if(R == true){ //########################################################## Right
+  else if(R == true){ //############################################## Right
     digitalWrite(8, HIGH);
     digitalWrite(10, LOW);
   }
 
-  else if(L == false && R == false){ //########################################### Straight
+  else if(L == false && R == false){ //############################### Straight
     digitalWrite(8, HIGH);
     digitalWrite(10, HIGH);
   }
@@ -112,17 +112,17 @@ void Drive(bool L, bool R){ //##################################################
 void loop() {
   // put your main code here, to run repeatedly:
   
-  if(Sensor_Read( 4, 5) == true){ //############################################## Read Sensor 1 (turn right)
+  if(Sensor_Read( 4, 5) == true){ //################################## Read Sensor 1 (turn right)
     Serial.println("[Turn_Right]");
+    Right = true;
   }
  
-  else if(Sensor_Read(6, 7) == true){ //########################################## Read Sensor 2 (turn left)
+  else if(Sensor_Read(6, 7) == true){ //############################## Read Sensor 2 (turn left)
     Serial.println("[Turn_Left]");
     Left = true;
-    Right = false;
   }
 
-  else{ //######################################################################## If nothing = true (go straight)
+  else{ //############################################################ If nothing = true (go straight)
   Left = false;
   Right = false;
   Serial.println("[Straight]");
